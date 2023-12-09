@@ -8,7 +8,7 @@ async function readFromTxtFile(){
 
 
 
- async function readLinesFromTxt(){
+ async function getNumbersFromLines(){
     try{
         const readTxt = await readFromTxtFile();
         const lines = readTxt.split('\n');
@@ -30,12 +30,4 @@ async function readFromTxtFile(){
         console.log("Whuppssss", e)
     }
 }
-readLinesFromTxt()
-
-// async function getNumber() {
-//     let line = await readLinesFromTxt();
-
-//     for(let i = 0; i<line; i++){
-//         console.log("Character",line[i])
-//     }
-// }
+getNumbersFromLines()
