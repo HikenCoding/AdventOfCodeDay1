@@ -1,4 +1,7 @@
 'use strict'
+
+const compareArr = ['one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten']
+
 async function readFromTxtFile(){
     const res = await fetch("test.txt");
     const data = await res.text();
