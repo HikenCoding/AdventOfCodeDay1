@@ -2,57 +2,39 @@
 async function readFromTxtFile(){
     const res = await fetch("test.txt");
     const data = await res.text();
-    // console.log(data)
+    console.log(data)
     return data;
 }
-
-
 
  async function getNumbersFromLines(){
     try{
         const readTxt = await readFromTxtFile();
         const lines = readTxt.split('\n');
-        let newChar;
-        let indexOfNumber=[];
+        let newArray = [];
 
-        for(let i = 0; i < lines.length; i++){
-            for(let j = 0; j<lines[i].length-1; j++){
-                console.log(lines[j], lines[i].length-1)
-                // newChar =+ lines[i][j]
-                // if(typeof newChar === "number")
-                // {
-                //     indexOfNumber = lines[j];
-                //     console.log(indexOfNumber);
-                //     containsNumber(indexOfNumber)
-                //     console.log(containsNumber(indexOfNumber))
-                //     // console.log(lines[j])
-                //     // console.log("DAS IST EINE ZAHL!!", j, newChar)
-                //     // console.log(indexOfNumber)
-                // }
+        lines.forEach(line => {
+            const numbersInLine = line.match(/\d+/g);
+            if(numbersInLine){
+                if(numbersInLine[0] === numbersInLine[numbersInLine.length-1]){
+                    newArray.push(numbersInLine[0]+numbersInLine[0]);
+                }
+                else {
+                    newArray.push(numbersInLine[0]+numbersInLine[numbersInLine.length-1])
+                }   
             }
-            return indexOfNumber;
-        }
+            
+        });
+        
+        const sum = Object.values(newArray).reduce((accumulator, currentValue) => accumulator + parseFloat(currentValue), 0);
+        console.log(`Numbers from line: ${newArray} \n The summary of these are: ${sum}`)
+
     }
     catch(e){
         console.log("Whuppssss", e)
     }
 }
 
-function containsNumber(str) {
-    const match = str.match(/\d+/g);
-
-    if(match){
-        const firstNumber  = parseInt(match[0],10);
-        const lastNumber = parseInt(match[match.length-1],10);
-        
-        return {
-            firstNumber: firstNumber,
-            lastNumber: lastNumber
-    };
-}
-    else{
-        return null;
-    }
-}
-
 getNumbersFromLines()
+
+
+
